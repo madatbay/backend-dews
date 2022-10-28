@@ -1,10 +1,11 @@
 from django.contrib.auth.password_validation import validate_password
-from django.utils import timezone
 
 from rest_framework import serializers
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from rest_framework.validators import UniqueValidator
+
+User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,7 +14,10 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "username", "email", "date_joined", "last_login")
+        fields = (
+            "profile_photo", "first_name", "last_name", "bio", "birth_date", "location", "username", "email",
+            "date_joined",
+            "last_login")
 
 
 class RegisterSerializer(serializers.ModelSerializer):
