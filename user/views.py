@@ -17,10 +17,10 @@ class UserViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.Cre
         return UserSerializer
 
     def get_permissions(self):
-        if self.action in ["create"]:
-            self.permission_classes = [AllowAny]
-        else:
+        if self.action in ["retrieve", "update"]:
             self.permission_classes = [IsAuthenticated]
+        else:
+            self.permission_classes = [AllowAny]
         return super(UserViewSet, self).get_permissions()
 
     def get_object(self):
