@@ -21,6 +21,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(required=True)
+    last_name = serializers.CharField(required=True)
     username = serializers.CharField(
         required=True, validators=[UniqueValidator(queryset=User.objects.all())]
     )
@@ -46,7 +48,8 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create(
-            full_name=validated_data["full_name"],
+            first_name=validated_data["first_name"],
+            last_name=validated_data["last_name"],
             username=validated_data["username"],
             email=validated_data["email"],
         )
