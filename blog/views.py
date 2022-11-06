@@ -33,5 +33,7 @@ class BlogViewSet(viewsets.ModelViewSet):
                 post.downvotes.add(request.user)
                 if request.user in post.upvotes.all():
                     post.upvotes.remove(request.user)
-            return Response({"upvote_count": post.upvote_count, "downvote_count": post.downvote_count})
+            return Response({"upvote_count": post.upvote_count, "downvote_count": post.downvote_count,
+                             "is_upvoted": request.user in post.upvotes.all(),
+                             "is_downvoted": request.user in post.downvotes.all()})
         return Response({"detail": "Payload is wrong."}, status=status.HTTP_400_BAD_REQUEST)
