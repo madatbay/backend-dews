@@ -26,11 +26,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = ['https://*.dews.cf']
+
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://dews.cf',
     'https://dews.cf',
 ]
+
 
 # Application definition
 
