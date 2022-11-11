@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from .models import User
 from .serializers import UserSerializer, RegisterSerializer
 
+
 class UserViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = User.objects.all()
 
