@@ -1,8 +1,7 @@
 from django.contrib.auth.password_validation import validate_password
-
-from rest_framework import serializers
-
+from django.templatetags.static import static
 from django.contrib.auth import get_user_model
+from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
 from user.models import FollowRelation
@@ -33,7 +32,9 @@ class UserSerializer(serializers.ModelSerializer):
         request = self.context["request"]
         if user.profile_photo:
             photo_url = user.profile_photo.url
-            return request.build_absolute_uri(photo_url)
+        else:
+            photo_url = static("user/default_user.png")
+        return request.build_absolute_uri(photo_url)
 
     def get_followings(self, user: User):
         return FollowRelationSerializer(user.followings.all(), many=True).data
