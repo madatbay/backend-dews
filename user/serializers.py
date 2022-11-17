@@ -25,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            "profile_photo", "first_name", "last_name", "bio", "birth_date", "location", "username", "email",
+            "id", "profile_photo", "first_name", "last_name", "bio", "birth_date", "location", "username", "email",
             "date_joined", "last_login", "followings", "followers")
 
     def get_profile_photo(self, user: User):
